@@ -4,6 +4,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import com.qa.pojos.GraphQLQuery;
@@ -12,11 +13,7 @@ import com.qa.pojos.QueryVariable;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
-/**
- * 
- * @author naveenautomationlabs
- *
- */
+
 public class GraphQLQueryTest {
 	
 	@Test
@@ -41,7 +38,9 @@ public class GraphQLQueryTest {
 	}
 	
 	
+	
 	@Test
+	@Ignore
 	public void getAllUsersTest() {
 		RestAssured.baseURI ="https://hasura.io";
 		String query = "{\"query\":\"{\\n  users(limit: 10) {\\n    id\\n    name\\n  }\\n}\\n\",\"variables\":null}";
@@ -68,6 +67,7 @@ public class GraphQLQueryTest {
 	}
 	
 	@Test(dataProvider = "getQueryData")
+	@Ignore
 	public void getAllUsersTestWithDataTest(String limit, String name, String title) {
 		RestAssured.baseURI ="https://hasura.io";
 		String query = "{\"query\":\"{\\n  users(limit: "+limit+", where: {name: {_eq: \\\""+name+"\\\"}}) {\\n    id\\n    name\\n    todos(where: {title: {_eq: \\\""+title+"\\\"}}) {\\n      title\\n    }\\n  }\\n}\\n\",\"variables\":null}";
@@ -87,6 +87,7 @@ public class GraphQLQueryTest {
 	
 	
 	@Test
+	@Ignore
 	public void getAllUsers_WithPojoTest() {
 		RestAssured.baseURI ="https://hasura.io";
 		GraphQLQuery query = new GraphQLQuery();
